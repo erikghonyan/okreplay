@@ -48,14 +48,16 @@ By default the interceptor won't do anything unless it's explicitly started.
 In your instrumentation test class, add:
 
 ```java
-private final ActivityTestRule<MainActivity> activityTestRule =
+  private final ActivityTestRule<MainActivity> activityTestRule =
       new ActivityTestRule<>(MainActivity.class);
+
   private final OkReplayConfig configuration = new OkReplayConfig.Builder()
       .tapeRoot(new AndroidTapeRoot(getContext(), getClass()))
       .defaultMode(TapeMode.READ_WRITE) // or TapeMode.READ_ONLY
       .sslEnabled(true)
       .interceptor(okReplayInterceptor))
       .build();
+
   @Rule public final TestRule testRule =
       new OkReplayRuleChain(configuration, activityTestRule).get();
 
